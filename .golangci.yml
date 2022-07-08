@@ -1,0 +1,29 @@
+run:
+    skip-dirs:
+        - vendor
+
+linters-settings:
+    golint:
+        min-confidence: 0.1
+
+linters:
+    enable-all: true
+    disable:
+        - funlen
+        - interfacer
+        - maligned
+        - errcheck
+        - gochecknoglobals
+        - gomnd
+        - dupl
+
+        # Drives todos nuts
+        - godox
+
+issues:
+  exclude-rules:
+    - linters:
+        - lll
+        - gocognit
+        - staticcheck
+      path: "(.+)_test.go|mock.go"
