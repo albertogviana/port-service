@@ -2,6 +2,8 @@ package port
 
 import (
 	"context"
+	"fmt"
+
 	"github.com/albertogviana/port-service/internal/entity"
 )
 
@@ -24,8 +26,18 @@ func (s *Service) SavePort(ctx context.Context, p *entity.Port) error {
 	}
 
 	if currentPort == nil {
-		return s.repo.Create(ctx, p)
+		err := s.repo.Create(ctx, p)
+		if err != nil {
+			return fmt.Errorf("error during the create new port: %w", err)
+		}
+
+		return nil
 	}
 
-	return s.repo.Update(ctx, p)
+	err = s.repo.Update(ctx, p)
+	if err != nil {
+		return fmt.Errorf("error during the update port: %w", err)
+	}
+
+	return nil
 }

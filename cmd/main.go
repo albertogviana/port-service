@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/albertogviana/port-service/internal/commands"
-	"github.com/urfave/cli/v2"
 	"log"
 	"os"
 	"sort"
+
+	"github.com/albertogviana/port-service/internal/commands"
+	"github.com/urfave/cli/v2"
 )
 
 func main() {

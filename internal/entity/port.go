@@ -6,7 +6,6 @@ import (
 )
 
 type Port struct {
-	ID        int64
 	Name      string
 	City      string
 	Country   string
@@ -26,6 +25,7 @@ func (p *Port) UnmarshalJSON(data []byte) error {
 
 	if err := json.Unmarshal(data, &pr); err != nil {
 		log.Fatal(err)
+
 		return err
 	}
 

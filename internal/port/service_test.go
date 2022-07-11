@@ -19,9 +19,9 @@ func TestServiceUnitTestSuite(t *testing.T) {
 
 func (s *ServiceUnitTestSuite) TestSavePort() {
 	type tableTest struct {
-		name     string
-		data     *entity.Port
-		input    *entity.Port
+		name  string
+		data  *entity.Port
+		input *entity.Port
 	}
 
 	tt := []tableTest{
