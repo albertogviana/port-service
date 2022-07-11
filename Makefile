@@ -3,20 +3,12 @@ export GOPROXY=$("https://proxy.golang.org")
 SHELL = /bin/bash
 GOLANGCI_LINT = v1.46.2
 
-.PHONY: unit-test
-unit-test: clean-test-cache
-	@go test -v -timeout 30s ./... -cover -coverprofile=coverage_unit.out -race -run Unit
-
-.PHONY: integration-test
-integration-test: clean-test-cache
-	@go test -v -timeout 30s ./... -cover -coverprofile=coverage_integration.out -race -run Integration
-
 .PHONY: clean-test-cache
 clean-test-cache:
 	@go clean -testcache ./...
 
-.PHONY: test-all
-test-all: clean-test-cache
+.PHONY: test
+test: clean-test-cache
 	@go test -v -timeout 30s ./... -race -cover -coverpkg=./... -coverprofile=coverage.out
 
 .PHONY: coverage
@@ -34,3 +26,12 @@ lint: install-lint
 
 .PHONY: check
 check: test-all lint # Run tests and linters
+
+.PHONY: build-port-service-linux
+build-port-service-linux:
+	@echo "Building Port Service binary for Linux"
+	@GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o cmd/port-service cmd/main.go
+
+.PHONY: docker-build
+docker-build:
+	docker build -t albertogviana/port-service:latest -f Dockerfile --no-cache .
