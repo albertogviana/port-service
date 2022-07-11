@@ -25,7 +25,7 @@ lint: install-lint
 	@bin/golangci-lint run
 
 .PHONY: check
-check: test-all lint # Run tests and linters
+check: test lint # Run tests and linters
 
 .PHONY: build-port-service-linux
 build-port-service-linux:
