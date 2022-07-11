@@ -41,13 +41,13 @@ make docker-build
 So after the project is built, you can run the application by running the command below:
 
 ```
-docker container run -it --rm -v $(pwd)/testdata:/import  albertogviana/port-service --help
+docker container run -it --rm -v $(pwd)/import:/import  albertogviana/port-service --help
 ```
 
 The command above will run the application and will show the help menu.
 
 
-For the application to find the file to import, you need to place it inside the import directory. So the application working directory is inside the `import` directory and is required to pass the file's filename inside the directory. And this way, the app will start the import process.
+For the application to find and process the file, you must place it inside the `import` directory. Then, the application will read the file inside the `import` directory. But, first, it is required to pass the file's filename as a parameter. And this way, the app will start the import process.
 
 ```
 docker container run -it --rm -v $(pwd)/import:/import albertogviana/port-service import --file my-file.json
