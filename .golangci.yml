@@ -2,10 +2,6 @@ run:
     skip-dirs:
         - vendor
 
-linters-settings:
-    golint:
-        min-confidence: 0.1
-
 linters:
     enable-all: true
     disable:
@@ -16,6 +12,17 @@ linters:
         - gochecknoglobals
         - gomnd
         - dupl
+        - exhaustivestruct
+        - varnamelen
+        - forcetypeassert
+        - exhaustruct
+        - ifshort
+        - paralleltest
+        - goerr113
+        - wsl
+        - gci
+        - wrapcheck
+        - errorlint
 
         # Drives todos nuts
         - godox
@@ -26,4 +33,5 @@ issues:
         - lll
         - gocognit
         - staticcheck
+        - scopelint
       path: "(.+)_test.go|mock.go"

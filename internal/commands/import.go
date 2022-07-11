@@ -5,14 +5,15 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
+
 	"github.com/albertogviana/port-service/internal/entity"
 	logger "github.com/albertogviana/port-service/internal/log"
 	"github.com/albertogviana/port-service/internal/port"
 	"github.com/urfave/cli/v2"
-	"os"
 )
 
-// Import displays the latest state running in the edge node
+// Import imports the port data from a file to a database.
 func Import(c *cli.Context) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()

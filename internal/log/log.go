@@ -6,7 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// NewLogger returns an instance of logger ready to use
+// NewLogger returns an instance of logger ready to use.
 func NewLogger(environment string, output io.Writer, debugLevel bool) *logrus.Logger {
 	l := logrus.New()
 
