@@ -73,8 +73,14 @@ func (s *ServiceUnitTestSuite) TestSavePort() {
 		},
 	}
 
+	s.T().Parallel()
+
 	for _, tc := range tt {
+		tc := tc
+
 		s.Run(tc.name, func() {
+			s.T().Parallel()
+
 			svc := port.NewService(
 				port.NewRepositoryInMem(),
 			)
