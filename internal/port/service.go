@@ -3,8 +3,6 @@ package port
 import (
 	"context"
 	"fmt"
-
-	"github.com/albertogviana/port-service/internal/entity"
 )
 
 type Service struct {
@@ -18,8 +16,8 @@ func NewService(repo Repository) *Service {
 }
 
 // SavePort saves a port in the database or returns an error.
-func (s *Service) SavePort(ctx context.Context, p *entity.Port) error {
-	currentPort, err := s.repo.FindByUnLoc(ctx, p.Unloc)
+func (s *Service) SavePort(ctx context.Context, p *Port) error {
+	currentPort, err := s.repo.FindByUnLoc(ctx, p.Unlocs[0])
 
 	if err != nil && err != ErrPortNotFound {
 		return err

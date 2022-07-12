@@ -7,7 +7,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/albertogviana/port-service/internal/entity"
+	"github.com/albertogviana/port-service/internal/repository/memory"
+
 	logger "github.com/albertogviana/port-service/internal/log"
 	"github.com/albertogviana/port-service/internal/port"
 	"github.com/urfave/cli/v2"
@@ -18,7 +19,7 @@ func Import(c *cli.Context) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	svc := port.NewService(port.NewRepositoryInMem())
+	svc := port.NewService(memory.NewInMemRepository())
 
 	filename := c.String("file")
 
@@ -48,7 +49,7 @@ func Import(c *cli.Context) error {
 
 	count := 0
 	for d.More() {
-		m := make(map[string]*entity.Port, 1)
+		m := make(map[string]*port.Port, 1)
 
 		if err := d.Decode(&m); err != nil {
 			return fmt.Errorf("error to decode: %w", err)

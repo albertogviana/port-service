@@ -4,7 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/albertogviana/port-service/internal/entity"
+	"github.com/albertogviana/port-service/internal/repository/memory"
+
 	"github.com/albertogviana/port-service/internal/port"
 	"github.com/stretchr/testify/suite"
 )
@@ -20,55 +21,58 @@ func TestServiceUnitTestSuite(t *testing.T) {
 func (s *ServiceUnitTestSuite) TestSavePort() {
 	type tableTest struct {
 		name  string
-		data  *entity.Port
-		input *entity.Port
+		data  *port.Port
+		input *port.Port
 	}
 
 	tt := []tableTest{
 		{
 			name: "creating a new port",
 			data: nil,
-			input: &entity.Port{
-				Name:      "Ajman",
-				City:      "Ajman",
-				Country:   "United Arab Emirates",
-				Alias:     []string{},
-				Regions:   []string{},
-				Latitude:  55.5136433,
-				Longitude: 25.4052165,
-				Province:  "Ajman",
-				Timezone:  "Asia/Dubai",
-				Unloc:     "AEAJM",
-				Code:      "52000",
+			input: &port.Port{
+				Name:        "Ajman",
+				City:        "Ajman",
+				Country:     "United Arab Emirates",
+				Alias:       []string{},
+				Regions:     []string{},
+				Coordinates: []float64{55.5136433, 25.4052165},
+				Province:    "Ajman",
+				Timezone:    "Asia/Dubai",
+				Unlocs: []string{
+					"AEAJM",
+				},
+				Code: "52000",
 			},
 		},
 		{
 			name: "updating a port",
-			data: &entity.Port{
-				Name:      "Ajman",
-				City:      "Ajman",
-				Country:   "United Arab Emirates",
-				Alias:     []string{},
-				Regions:   []string{},
-				Latitude:  55.5136433,
-				Longitude: 25.4052165,
-				Province:  "Ajman",
-				Timezone:  "Asia/Dubai",
-				Unloc:     "AEAJM",
-				Code:      "52000",
+			data: &port.Port{
+				Name:        "Ajman",
+				City:        "Ajman",
+				Country:     "United Arab Emirates",
+				Alias:       []string{},
+				Regions:     []string{},
+				Coordinates: []float64{55.5136433, 25.4052165},
+				Province:    "Ajman",
+				Timezone:    "Asia/Dubai",
+				Unlocs: []string{
+					"AEAJM",
+				},
+				Code: "52000",
 			},
-			input: &entity.Port{
-				Name:      "Ajman 2",
-				City:      "Ajman 2",
-				Country:   "United Arab Emirates",
-				Alias:     []string{},
-				Regions:   []string{},
-				Latitude:  55.5136433,
-				Longitude: 25.4052165,
-				Province:  "Ajman",
-				Timezone:  "Asia/Dubai",
-				Unloc:     "AEAJM",
-				Code:      "52000",
+			input: &port.Port{
+				Name:        "Ajman 2",
+				City:        "Ajman 2",
+				Country:     "United Arab Emirates",
+				Alias:       []string{},
+				Regions:     []string{},
+				Coordinates: []float64{55.5136433, 25.4052165},
+				Province:    "Ajman",
+				Timezone:    "Asia/Dubai",
+				Unlocs: []string{
+					"AEAJM",
+				},
+				Code: "52000",
 			},
 		},
 	}
@@ -82,7 +86,7 @@ func (s *ServiceUnitTestSuite) TestSavePort() {
 			s.T().Parallel()
 
 			svc := port.NewService(
-				port.NewRepositoryInMem(),
+				memory.NewInMemRepository(),
 			)
 
 			if tc.data != nil {
