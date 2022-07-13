@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/albertogviana/port-service/internal/repository/memory"
+	"github.com/albertogviana/port-service/internal/repository"
 
 	logger "github.com/albertogviana/port-service/internal/log"
 	"github.com/albertogviana/port-service/internal/port"
@@ -19,7 +19,7 @@ func Import(c *cli.Context) error {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	svc := port.NewService(memory.NewInMemRepository())
+	svc := port.NewService(repository.NewInMemRepository())
 
 	filename := c.String("file")
 

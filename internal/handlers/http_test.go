@@ -9,11 +9,12 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/albertogviana/port-service/internal/repository"
+
 	"github.com/albertogviana/port-service/internal/web"
 
 	"github.com/albertogviana/port-service/internal/handlers"
 	"github.com/albertogviana/port-service/internal/port"
-	"github.com/albertogviana/port-service/internal/repository/memory"
 	"github.com/gorilla/mux"
 	log "github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/suite"
@@ -37,7 +38,7 @@ func (ph *PortHandlerUnitTestSuite) SetupSuite() {
 
 func (ph *PortHandlerUnitTestSuite) TestCreateOrUpdatePort() {
 	ph.Run("check create or update port router", func() {
-		svc := port.NewService(memory.NewInMemRepository())
+		svc := port.NewService(repository.NewInMemRepository())
 
 		router := mux.NewRouter()
 		handlers.MakePortHandlers(
@@ -155,7 +156,7 @@ func (ph *PortHandlerUnitTestSuite) TestCreateOrUpdatePort() {
 		tc := tc
 
 		ph.Run(tc.name, func() {
-			svc := port.NewService(memory.NewInMemRepository())
+			svc := port.NewService(repository.NewInMemRepository())
 
 			if tc.port != nil {
 				err := svc.SavePort(context.Background(), tc.port)
@@ -201,7 +202,7 @@ func (ph *PortHandlerUnitTestSuite) TestCreateOrUpdatePort() {
 
 func (ph *PortHandlerUnitTestSuite) TestGetPortByUnloc() {
 	ph.Run("check get port by unloc router", func() {
-		svc := port.NewService(memory.NewInMemRepository())
+		svc := port.NewService(repository.NewInMemRepository())
 
 		router := mux.NewRouter()
 		handlers.MakePortHandlers(
@@ -264,7 +265,7 @@ func (ph *PortHandlerUnitTestSuite) TestGetPortByUnloc() {
 		tc := tc
 
 		ph.Run(tc.name, func() {
-			svc := port.NewService(memory.NewInMemRepository())
+			svc := port.NewService(repository.NewInMemRepository())
 
 			if tc.port != nil {
 				err := svc.SavePort(context.Background(), tc.port)
