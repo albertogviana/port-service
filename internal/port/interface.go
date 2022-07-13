@@ -25,7 +25,9 @@ type Repository interface {
 
 // UseCaseReader has a list of methods that needs to be implemented by the
 // service for the reader interface.
-type UseCaseReader interface{}
+type UseCaseReader interface {
+	GetPortByUnLoc(ctx context.Context, unloc string) (*Port, error)
+}
 
 // UseCaseWriter has a list of methods that needs to be implemented by the
 // service for the writer interface.

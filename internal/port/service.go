@@ -39,3 +39,12 @@ func (s *Service) SavePort(ctx context.Context, p *Port) error {
 
 	return nil
 }
+
+func (s *Service) GetPortByUnLoc(ctx context.Context, unloc string) (*Port, error) {
+	p, err := s.repo.FindByUnLoc(ctx, unloc)
+	if err != nil {
+		return nil, err
+	}
+
+	return p, nil
+}
