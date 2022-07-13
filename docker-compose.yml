@@ -1,0 +1,11 @@
+version: "3"
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./migrations/port.sql:/docker-entrypoint-initdb.d/port.sql
+      - ./migrations/port-test.sql:/docker-entrypoint-initdb.d/port-test.sql
+    ports:
+      - "3306:3306"
