@@ -9,3 +9,16 @@ services:
       - ./migrations/port-test.sql:/docker-entrypoint-initdb.d/port-test.sql
     ports:
       - "3306:3306"
+
+  port:
+    image: albertogviana/port-service:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      PORT_DB_HOST: db
+    volumes:
+      - ./import:/import
+    command:
+      - start
