@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/albertogviana/port-service/internal/repository/memory"
+	"github.com/albertogviana/port-service/internal/repository"
 
 	"github.com/albertogviana/port-service/internal/port"
 	"github.com/stretchr/testify/suite"
@@ -86,7 +86,7 @@ func (s *ServiceUnitTestSuite) TestSavePort() {
 			s.T().Parallel()
 
 			svc := port.NewService(
-				memory.NewInMemRepository(),
+				repository.NewInMemRepository(),
 			)
 
 			if tc.data != nil {

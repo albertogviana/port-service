@@ -25,6 +25,11 @@ func main() {
 			},
 			Action: commands.Import,
 		},
+		{
+			Name:   "start",
+			Usage:  "Starts the Rest API.",
+			Action: commands.Start,
+		},
 	}
 
 	sort.Sort(cli.FlagsByName(app.Flags))

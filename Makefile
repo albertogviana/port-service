@@ -8,8 +8,16 @@ clean-test-cache:
 	@go clean -testcache ./...
 
 .PHONY: test
-test: clean-test-cache
+test: mysql-truncate-tables clean-test-cache
 	@go test -v -timeout 30s ./... -race -cover -coverpkg=./... -coverprofile=coverage.out
+
+.PHONY: unit-test
+unit-test: clean-test-cache
+	@go test -v -timeout 30s ./... -cover -coverprofile=coverage_unit.out -race -run Unit
+
+.PHONY: integration-test
+integration-test: mysql-truncate-tables clean-test-cache
+	@go test -v -timeout 30s ./... -cover -coverprofile=coverage_integration.out -race -run Integration
 
 .PHONY: coverage
 coverage:
@@ -26,6 +34,11 @@ lint: install-lint
 
 .PHONY: check
 check: test lint # Run tests and linters
+
+.PHONY: mysql-truncate-tables
+mysql-truncate-tables:
+	@echo "Truncate MySQL Tables before run Integration Tests"
+	@./scripts/mysql-ports-test-truncate.sh
 
 .PHONY: build-port-service-linux
 build-port-service-linux:

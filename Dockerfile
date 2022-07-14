@@ -7,10 +7,10 @@ RUN make build-port-service-linux
 
 FROM scratch
 
-COPY --from=builder /go/src/github.com/albertogviana/port-service/cmd/port-service /bin/port-service
+COPY --from=builder /go/src/github.com/albertogviana/port-service/cmd/port-service /port-service
 
 WORKDIR /import
 # nobody user
 USER 65534
 
-ENTRYPOINT [ "/bin/port-service" ]
+ENTRYPOINT [ "/port-service" ]
