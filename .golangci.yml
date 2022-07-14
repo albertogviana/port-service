@@ -23,6 +23,7 @@ linters:
         - gci
         - wrapcheck
         - errorlint
+        - cyclop
 
         # Drives todos nuts
         - godox

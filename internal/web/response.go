@@ -13,6 +13,10 @@ func Respond(w http.ResponseWriter, statusCode int, data interface{}) error {
 		return nil
 	}
 
+	if data == nil {
+		return nil
+	}
+
 	jsonData, err := json.Marshal(data)
 	if err != nil {
 		return err
