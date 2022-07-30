@@ -1,5 +1,3 @@
-
-
 # Port Domain Service
 
 It is responsible for keeping the port information up to date. The user will run the import command and pass a ports.json file, and the system will handle the creation or update of each record.
